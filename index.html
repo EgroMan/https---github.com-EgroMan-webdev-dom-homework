@@ -189,11 +189,24 @@ const renderUsers = () => {
           </div>
         </div>
       </li>`;
+      const commentClick = () =>{
+  const comment = document.querySelectorAll('.comment')
+comment.forEach(comment => {
+  comment.addEventListener('click',() => {
+    const existringComment = CommentInputElement.value;
+    const clikendComment = comment.textContent.trim();
+    const updatedComment = existringComment ? existringComment + " " + clikendComment : clikendComment;
+    CommentInputElement.value = updatedComment;
+  });
+  renderUsers();
+})
+}
     })
       .join("");
       
       ListCommentsElement.innerHTML = usersHTML;
       Initlikes();
+      commentClick()
     };
     renderUsers();
 
@@ -224,16 +237,8 @@ const renderUsers = () => {
 
 // КОМЕНТАРИИ
 
-const comment = document.querySelectorAll('.comment-text')
-comment.forEach(comment => {
-  comment.addEventListener('click', handLeReply)
-})
 
-function handLeReply(event) {
-  const commentDate = evetn.target.dataset.comment
-  const replyInput = document.getElementById('reply-input')
-  replyInput.value = commentDate
-}
+
   </script>
 </html>
 
