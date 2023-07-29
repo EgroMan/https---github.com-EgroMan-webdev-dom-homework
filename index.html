@@ -147,19 +147,16 @@
       },
     ]
 
-    const Initlikes = () => {
+    const initlikes = () => {
         const likeButtons = document.querySelectorAll(".like-button");
         for (const like of likeButtons) {
-          like.addEventListener('click', () => {
+          like.addEventListener("click", (event) => {
+            event.stopPropagation()
             const user = users[like.dataset.index]
-            let a = user.countLikes
             if (user.isLiked === false) {
               user.isLiked = true;
-              like.classList.add("-active-like")
               user.countLikes++;
-            }
-
-            else if (user.isLiked === true) {
+            } else if (user.isLiked === true) {
               user.isLiked = false
               user.countLikes--;
             }
@@ -167,7 +164,7 @@
           });
         }
       };
-Initlikes()
+initlikes()
 
 
 const renderUsers = () => {
@@ -190,25 +187,23 @@ const renderUsers = () => {
         </div>
       </li>`;
       const commentClick = () =>{
-  const comment = document.querySelectorAll('.comment')
-comment.forEach(comment => {
-  comment.addEventListener('click',() => {
-    const existringComment = CommentInputElement.value;
-    const clikendComment = comment.textContent.trim();
-    const updatedComment = existringComment ? existringComment + " " + clikendComment : clikendComment;
-    CommentInputElement.value = updatedComment;
-  });
-  renderUsers();
-})
-}
+        const comment = document.querySelectorAll(".comment")
+        comment.forEach(comment => {
+          comment.addEventListener("click",() => {
+            const existringComment = CommentInputElement.value;
+            const clikendComment = comment.textContent.trim();
+            const updatedComment = existringComment ? existringComment + " " + clikendComment : clikendComment;
+            CommentInputElement.value = updatedComment;
+          });
+        })
+      }
     })
       .join("");
       
       ListCommentsElement.innerHTML = usersHTML;
-      Initlikes();
+      initlikes();
       commentClick()
     };
-    renderUsers();
 
 
     ButtonInputElement.addEventListener("click", () => {
